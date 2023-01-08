@@ -1,0 +1,208 @@
+openapi: '3.0.2'
+info:
+  title: Merkez API Specification
+  version: '0.1'
+  description: API Specification for Merkez institute. Based on [software requirements](https://whimsical.com/software-requirements-specification-AHLth8LbaqS17rmKiEQAyd)
+  termsOfService: 'https://www.merkez.com/terms'
+  contact:
+    name: API Support
+    email: support@merkez.com
+    url: 'https://www.merkez.com/support'
+servers:
+  - url: https://dev.merkez.com/v1
+    description: Development Server
+  - url: https://staging.merkez.com/v1
+    description: Staging Server
+  - url: https://api.merkez.com/v1
+    description: Production Server
+paths:
+  /courses:
+    get:
+      tags:
+        - courses
+      summary: Get all courses
+      description: Returns all courses
+      responses:
+        '200':
+          description: successfull operation
+    post:
+      tags:
+        - courses
+      summary: Add new course
+      responses:
+        '201':
+          description: Created Successfully
+  /courses/{courseId}:
+    get:
+      tags:
+        - courses
+      summary: Get single course
+      responses:
+        '200':
+          description: OK
+    put:
+      tags:
+        - courses
+      summary: Edit single course
+      responses:
+        '200':
+          description: successfull edit
+    delete:
+      tags:
+        - courses
+      summary: Delete single course
+      responses:
+        '200':
+          description: successfull delete
+  /categories:
+    get:
+      tags:
+        - categories
+      summary: Get all categories
+      responses:
+        '200':
+          description: successfull fetch
+    post:
+      tags:
+        - categories
+      summary: Add new category
+      responses:
+        '201':
+          description: successfully created
+  /categories/{categoryId}:
+    get:
+      tags:
+        - categories
+      summary: Get single category
+      responses:
+        '200':
+          description: successfull fetch
+    put:
+      tags:
+        - categories
+      summary: Edit single category
+      responses:
+        '200':
+          description: successfull edit
+    delete:
+      tags:
+        - categories
+      summary: Delete single category
+      responses:
+        '200':
+          description: successfull delete
+  /users:
+    get:
+      tags:
+        - users
+      summary: Get all users
+      responses:
+        '200':
+          description: successfull fetch
+    post:
+      tags:
+        - users
+      summary: Add new user
+      responses:
+        '201':
+          description: successfull creation
+  /users/{userId}:
+    get:
+      tags:
+        - users
+      summary: Get single user
+      responses:
+        '200':
+          description: successfull fetch
+    put:
+      tags:
+        - users
+      summary: Edit single user
+      responses:
+        '200':
+          description: successfull edit
+    delete:
+      tags:
+        - users
+      summary: Delete single user
+      responses:
+        '200':
+          description: successfull deletion
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        email:
+          type: string
+          example: iqbal.adudu@gmail.com
+        password:
+          type: string
+          example: secret123
+        username:
+          type: string
+          example: iqbaladudu
+        firstName:
+          type: string
+          example: iqbal
+        lastName:
+          type: string
+          example: adudu
+        phone:
+          type: string
+          example: '08123456789'
+        userStatus:
+          type: string
+          description: User status active or inactive
+          enum:
+            - active
+            - inactive
+    Mentor:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+          example: 1
+    Mentee:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Hard Skill
+    Course:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Bahasa Inggris
+        mentorId:
+          type: integer
+          format: int64
+        category:
+          $ref: '#/components/schemas/Category'
+  requestBodies:
+    Course:
+      description: Object needed to create the course
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Course'
