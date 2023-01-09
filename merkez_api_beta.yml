@@ -30,6 +30,7 @@ paths:
         - courses
       summary: Add new course
       requestBody:
+        description: Object to create new course
         content:
           application/json:
             schema:
@@ -49,6 +50,12 @@ paths:
       tags:
         - courses
       summary: Edit single course
+      requestBody:
+        description: Object to edit the existing course
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
       responses:
         '200':
           description: successfull edit
@@ -72,6 +79,7 @@ paths:
         - categories
       summary: Add new category
       requestBody:
+        description: Object to create new category
         content:
           application/json:
             schema:
@@ -91,6 +99,12 @@ paths:
       tags:
         - categories
       summary: Edit single category
+      requestBody:
+        description: Object to edit existing category
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
       responses:
         '200':
           description: successfull edit
@@ -114,6 +128,7 @@ paths:
         - users
       summary: Add new user
       requestBody:
+        description: Object to create new user
         content:
           application/json:
             schema:
@@ -133,6 +148,12 @@ paths:
       tags:
         - users
       summary: Edit single user
+      requestBody:
+        description: Object to edit existing user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
       responses:
         '200':
           description: successfull edit
