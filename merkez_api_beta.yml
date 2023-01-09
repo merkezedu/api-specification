@@ -2,7 +2,9 @@ openapi: '3.0.2'
 info:
   title: Merkez API Specification
   version: '0.1'
-  description: API Specification for Merkez institute. Based on [software requirements](https://whimsical.com/software-requirements-specification-AHLth8LbaqS17rmKiEQAyd)
+  description: |-
+    API Specification for Merkez institute, based on [software requirements document](https://whimsical.com/software-requirements-specification-AHLth8LbaqS17rmKiEQAyd).
+    This specification is the single source of truth for Merkez REST API.
   termsOfService: 'https://www.merkez.com/terms'
   contact:
     name: API Support
