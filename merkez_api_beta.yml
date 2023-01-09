@@ -29,6 +29,11 @@ paths:
       tags:
         - courses
       summary: Add new course
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
       responses:
         '201':
           description: Created Successfully
@@ -66,9 +71,14 @@ paths:
       tags:
         - categories
       summary: Add new category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
       responses:
         '201':
-          description: successfully created
+          description: successfull creation
   /categories/{categoryId}:
     get:
       tags:
@@ -103,6 +113,11 @@ paths:
       tags:
         - users
       summary: Add new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
       responses:
         '201':
           description: successfull creation
@@ -193,7 +208,7 @@ components:
           example: 1
         name:
           type: string
-          example: Bahasa Inggris
+          example: Kursus Bahasa Inggris
         mentorId:
           type: integer
           format: int64
