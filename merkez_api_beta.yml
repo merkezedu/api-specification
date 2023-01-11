@@ -26,62 +26,76 @@ paths:
       description: Returns all courses
       responses:
         '200':
-          description: successfull operation
+          description: successfull retrieval
     post:
       tags:
         - courses
       summary: Add new course
+      description: Returns the created course
       requestBody:
-        description: Object to create new course
+        description: Object needed to create new course
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Course'
       responses:
         '201':
-          description: Created Successfully
+          description: successfull creation
   /courses/{courseId}:
     get:
       tags:
         - courses
       summary: Get single course
+      description: Returns single course
+      parameters:
+        - name: courseId
+          in: path
+          description: ID of course to return
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
-          description: OK
+          description: successfull retrieval
     put:
       tags:
         - courses
-      summary: Edit single course
+      summary: Update single course
+      description: Returns the updated course
       requestBody:
-        description: Object to edit the existing course
+        description: Object needed to update the existing course
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Course'
       responses:
         '200':
-          description: successfull edit
+          description: successfull update
     delete:
       tags:
         - courses
       summary: Delete single course
+      description: Returns the deleted course
       responses:
         '200':
-          description: successfull delete
+          description: successfull deletion
   /categories:
     get:
       tags:
         - categories
       summary: Get all categories
+      description: Returns all categories
       responses:
         '200':
-          description: successfull fetch
+          description: successfull retrieval
     post:
       tags:
         - categories
       summary: Add new category
+      description: Returns the created category
       requestBody:
-        description: Object to create new category
+        description: Object needed to create new category
         content:
           application/json:
             schema:
@@ -94,43 +108,56 @@ paths:
       tags:
         - categories
       summary: Get single category
+      description: Returns single category
+      parameters:
+        - name: categoryId
+          in: path
+          description: ID of category to return
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
-          description: successfull fetch
+          description: successfull retrieval
     put:
       tags:
         - categories
-      summary: Edit single category
+      summary: Update single category
+      description: Returns the updated category
       requestBody:
-        description: Object to edit existing category
+        description: Object needed to update existing category
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Category'
       responses:
         '200':
-          description: successfull edit
+          description: successfull update
     delete:
       tags:
         - categories
       summary: Delete single category
+      description: Returns the deleted category
       responses:
         '200':
-          description: successfull delete
+          description: successfull deletion
   /users:
     get:
       tags:
         - users
       summary: Get all users
+      description: Returns all users
       responses:
         '200':
-          description: successfull fetch
+          description: successfull retrieval
     post:
       tags:
         - users
       summary: Add new user
+      description: Returns the created user
       requestBody:
-        description: Object to create new user
+        description: Object needed to create new user
         content:
           application/json:
             schema:
@@ -143,26 +170,37 @@ paths:
       tags:
         - users
       summary: Get single user
+      description: Returns single user
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user to return
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
-          description: successfull fetch
+          description: successfull retrieval
     put:
       tags:
         - users
-      summary: Edit single user
+      summary: Update single user
+      description: Return the updated user
       requestBody:
-        description: Object to edit existing user
+        description: Object needed to update existing user
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
       responses:
         '200':
-          description: successfull edit
+          description: successfull update
     delete:
       tags:
         - users
       summary: Delete single user
+      description: Returns the deleted user
       responses:
         '200':
           description: successfull deletion
