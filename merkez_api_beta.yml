@@ -4,7 +4,11 @@ info:
   version: '0.1'
   description: |-
     API Specification for Merkez institute, based on [software requirements document](https://whimsical.com/software-requirements-specification-AHLth8LbaqS17rmKiEQAyd).
-    This specification is the single source of truth for Merkez REST API.
+    This specification is the single source of truth for Merkez REST API. 
+    
+    These links are useful to understand the api design:
+    1. [RESTful web API design](https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design)
+    2. [REST API Best Practices – REST Endpoint Design Examples](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/)
   termsOfService: 'https://www.merkez.com/terms'
   contact:
     name: API Support
@@ -27,6 +31,8 @@ paths:
       responses:
         '200':
           description: successfull retrieval
+        '204':
+          description: no courses (typically because filtering or course is not added yet)
     post:
       tags:
         - courses
@@ -41,6 +47,8 @@ paths:
       responses:
         '201':
           description: successfull creation
+        '400':
+          description: invalid request body
   /courses/{courseId}:
     get:
       tags:
@@ -58,7 +66,9 @@ paths:
       responses:
         '200':
           description: successfull retrieval
-    put:
+        '404':
+          description: not found / invalid ID
+    patch:
       tags:
         - courses
       summary: Update single course
@@ -72,11 +82,15 @@ paths:
       responses:
         '200':
           description: successfull update
+        '400':
+          description: invalid request body
+        '404':
+          description: not found / invalid ID
     delete:
       tags:
         - courses
       summary: Delete single course
-      description: Returns the deleted course
+      description: Returns nothing when course is deleted successfully
       parameters:
         - name: courseId
           in: path
@@ -86,8 +100,10 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        '204':
           description: successfull deletion
+        '404':
+          description: not found / invalid ID
   /categories:
     get:
       tags:
@@ -97,6 +113,8 @@ paths:
       responses:
         '200':
           description: successfull retrieval
+        '204':
+          description: no categories (typically because filtering or category is not added yet)
     post:
       tags:
         - categories
@@ -111,6 +129,8 @@ paths:
       responses:
         '201':
           description: successfull creation
+        '400':
+          description: invalid request body
   /categories/{categoryId}:
     get:
       tags:
@@ -128,7 +148,9 @@ paths:
       responses:
         '200':
           description: successfull retrieval
-    put:
+        '404':
+          description: not found / invalid ID
+    patch:
       tags:
         - categories
       summary: Update single category
@@ -142,11 +164,15 @@ paths:
       responses:
         '200':
           description: successfull update
+        '400':
+          description: invalid request body
+        '404':
+          description: not found / invalid ID
     delete:
       tags:
         - categories
       summary: Delete single category
-      description: Returns the deleted category
+      description: Returns nothing when category is deleted successfully
       parameters:
         - name: categoryId
           in: path
@@ -156,8 +182,10 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        '204':
           description: successfull deletion
+        '404':
+          description: not found / invalid ID
   /users:
     get:
       tags:
@@ -167,6 +195,8 @@ paths:
       responses:
         '200':
           description: successfull retrieval
+        '204':
+          description: no users (typically because filtering or users is not added yet)
     post:
       tags:
         - users
@@ -181,6 +211,8 @@ paths:
       responses:
         '201':
           description: successfull creation
+        '400':
+          description: invalid request body
   /users/{userId}:
     get:
       tags:
@@ -198,7 +230,9 @@ paths:
       responses:
         '200':
           description: successfull retrieval
-    put:
+        '404':
+          description: not found / invalid ID
+    patch:
       tags:
         - users
       summary: Update single user
@@ -212,11 +246,15 @@ paths:
       responses:
         '200':
           description: successfull update
+        '400':
+          description: invalid request body
+        '404':
+          description: not found / invalid ID
     delete:
       tags:
         - users
       summary: Delete single user
-      description: Returns the deleted user
+      description: Returns nothing when user is deleted successfully
       parameters:
         - name: userId
           in: path
@@ -226,8 +264,10 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        '204':
           description: successfull deletion
+        '404':
+          description: not found / invalid ID
 components:
   schemas:
     User:
