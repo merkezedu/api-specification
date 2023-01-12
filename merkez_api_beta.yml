@@ -22,6 +22,61 @@ servers:
   - url: https://api.merkez.com/v1
     description: Production Server
 paths:
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: Login with existing user
+      description: Returns JWT token when credential is valid
+      requestBody:
+        description: credential needed to login the user
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: johndoe
+                password:
+                  type: string
+                  example: secret123
+                confirmPassword:
+                  type: string
+                  example: secret123
+      responses:
+        '200':
+          description: successfull login
+        '401':
+          description: bad credential
+  /auth/logout:
+    get:
+      tags:
+        - auth
+      summary: Logout the current login user
+      description: Logout the user and return nothing
+      responses:
+        '204':
+          description: successfull logout
+        '401':
+          description: user not login when try to logout
+  /auth/register:
+    post:
+      tags:
+        - auth
+      summary: Register the user
+      description: Return the data of the registered user
+      requestBody:
+        description: Object needed to register the user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: successfull registration and creation of user
+        '400':
+          description: invalid request body
   /courses:
     get:
       tags:
