@@ -57,9 +57,12 @@ paths:
       description: Logout the user and return nothing
       responses:
         '204':
-          description: successfull logout
+          $ref: "#/components/responses/SuccessNoContent"
         '401':
-          description: user not login when try to logout
+          $ref: "#/components/responses/UnauthorizedError"
+      security:
+        - bearerAuth: []
+      
   /auth/register:
     post:
       tags:
@@ -87,7 +90,7 @@ paths:
         '200':
           description: successfull retrieval
         '204':
-          description: no courses (typically because filtering or course is not added yet)
+          $ref: "#/components/responses/SuccessNoContent"
     post:
       tags:
         - courses
@@ -104,6 +107,12 @@ paths:
           description: successfull creation
         '400':
           description: invalid request body
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: "#/components/responses/ForbidenError"
+      security:
+        - bearerAuth: []
   /courses/{courseId}:
     get:
       tags:
@@ -122,7 +131,7 @@ paths:
         '200':
           description: successfull retrieval
         '404':
-          description: not found / invalid ID
+          $ref: "#/components/responses/NotFoundError"
     patch:
       tags:
         - courses
@@ -147,8 +156,14 @@ paths:
           description: successfull update
         '400':
           description: invalid request body
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
+        '403':
+          $ref: '#/components/responses/ForbidenError'
         '404':
-          description: not found / invalid ID
+          $ref: "#/components/responses/NotFoundError"
+      security:
+        - bearerAuth: []
     delete:
       tags:
         - courses
@@ -164,9 +179,16 @@ paths:
             format: int64
       responses:
         '204':
-          description: successfull deletion
+          $ref: "#/components/responses/SuccessNoContent"
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
+        '403':
+          $ref: "#/components/responses/ForbidenError"
         '404':
-          description: not found / invalid ID
+          $ref: "#/components/responses/NotFoundError"
+      security:
+        - bearerAuth: []
+      
   /categories:
     get:
       tags:
@@ -177,7 +199,7 @@ paths:
         '200':
           description: successfull retrieval
         '204':
-          description: no categories (typically because filtering or category is not added yet)
+          $ref: "#/components/responses/SuccessNoContent"
     post:
       tags:
         - categories
@@ -192,8 +214,14 @@ paths:
       responses:
         '201':
           description: successfull creation
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
+        '403':
+          $ref: "#/components/responses/ForbidenError"
         '400':
           description: invalid request body
+      security:
+        - bearerAuth: []
   /categories/{categoryId}:
     get:
       tags:
@@ -212,7 +240,7 @@ paths:
         '200':
           description: successfull retrieval
         '404':
-          description: not found / invalid ID
+          $ref: "#/components/responses/NotFoundError"
     patch:
       tags:
         - categories
@@ -237,8 +265,14 @@ paths:
           description: successfull update
         '400':
           description: invalid request body
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
+        '403':
+          $ref: "#/components/responses/ForbidenError"
         '404':
-          description: not found / invalid ID
+          $ref: "#/components/responses/NotFoundError"
+      security:
+        - bearerAuth: []
     delete:
       tags:
         - categories
@@ -254,9 +288,16 @@ paths:
             format: int64
       responses:
         '204':
-          description: successfull deletion
+          $ref: "#/components/responses/SuccessNoContent"
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
+        '403':
+          $ref: "#/components/responses/ForbidenError"
         '404':
-          description: not found / invalid ID
+          $ref: "#/components/responses/NotFoundError"
+      security:
+        - bearerAuth: []
+      
   /users:
     get:
       tags:
@@ -267,7 +308,7 @@ paths:
         '200':
           description: successfull retrieval
         '204':
-          description: no users (typically because filtering or users is not added yet)
+          $ref: "#/components/responses/SuccessNoContent"
     post:
       tags:
         - users
@@ -282,8 +323,14 @@ paths:
       responses:
         '201':
           description: successfull creation
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
+        '403':
+          $ref: "#/components/responses/ForbidenError"
         '400':
           description: invalid request body
+      security:
+        - bearerAuth: []
   /users/{userId}:
     get:
       tags:
@@ -302,7 +349,7 @@ paths:
         '200':
           description: successfull retrieval
         '404':
-          description: not found / invalid ID
+          $ref: "#/components/responses/NotFoundError"
     patch:
       tags:
         - users
@@ -327,8 +374,14 @@ paths:
           description: successfull update
         '400':
           description: invalid request body
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
+        '403':
+          $ref: "#/components/responses/ForbidenError"
         '404':
-          description: not found / invalid ID
+          $ref: "#/components/responses/NotFoundError"
+      security:
+        - bearerAuth: []
     delete:
       tags:
         - users
@@ -344,9 +397,15 @@ paths:
             format: int64
       responses:
         '204':
-          description: successfull deletion
+          $ref: "#/components/responses/SuccessNoContent"
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
+        '403':
+          $ref: "#/components/responses/ForbidenError"
         '404':
-          description: not found / invalid ID
+          $ref: "#/components/responses/NotFoundError"
+      security:
+        - bearerAuth: []
 components:
   schemas:
     User:
@@ -453,3 +512,17 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Course'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    SuccessNoContent:
+      description: Successfull operation (no content to return)
+    NotFoundError:
+      description: Not found / invalid resource ID
+    UnauthorizedError:
+      description: Access token is missing or invalid
+    ForbidenError:
+      description: Token is valid but operation is not allowed
