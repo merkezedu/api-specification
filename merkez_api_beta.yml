@@ -319,9 +319,19 @@ components:
         phone:
           type: string
           example: '08123456789'
+        gender:
+          type: string
+          enum:
+            - Male
+            - Female
+            - Unknown
+        birthDate:
+          type: string
+          example: 01/01/1999
+        address:
+          $ref: '#/components/schemas/Address'
         userStatus:
           type: string
-          description: User status active or inactive
           enum:
             - active
             - inactive
@@ -358,11 +368,29 @@ components:
         name:
           type: string
           example: Kursus Bahasa Inggris
-        mentorId:
-          type: integer
-          format: int64
+        mentor:
+          $ref: '#/components/schemas/Mentor'
         category:
           $ref: '#/components/schemas/Category'
+    Address:
+      type: object
+      properties:
+        jalan:
+          type: string
+          example: Jl. Soekarno hatta
+        kecamatan:
+          type: string
+          example: Tanah Abang
+        kabupaten:
+          type: string
+          description: kabupaten atau kota
+          example: ponorogo
+        provinsi:
+          type: string
+          example: Jawa Barat
+        Negara:
+          type: string
+          example: Indonesia
   requestBodies:
     Course:
       description: Object needed to create the course
