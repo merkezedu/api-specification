@@ -10,6 +10,9 @@ info:
     1. [RESTful web API design](https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design)
     2. [REST API Best Practices – REST Endpoint Design Examples](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/)
   termsOfService: 'https://www.merkez.com/terms'
+  license:
+    name: GNU General Public License 3.0
+    url: https://www.gnu.org/licenses/gpl-3.0.html
   contact:
     name: API Support
     email: support@merkez.com
@@ -24,6 +27,7 @@ servers:
 paths:
   /auth/login:
     post:
+      operationId: loginUser
       tags:
         - auth
       summary: Login with existing user
@@ -51,6 +55,7 @@ paths:
           description: bad credential
   /auth/logout:
     get:
+      operationId: logoutUser
       tags:
         - auth
       summary: Logout the current login user
@@ -65,6 +70,7 @@ paths:
       
   /auth/register:
     post:
+      operationId: registerUser
       tags:
         - auth
       summary: Register the user
@@ -82,6 +88,7 @@ paths:
           description: invalid request body
   /courses:
     get:
+      operationId: getCourses
       tags:
         - courses
       summary: Get all courses
@@ -92,6 +99,7 @@ paths:
         '204':
           $ref: "#/components/responses/SuccessNoContent"
     post:
+      operationId: addCourse
       tags:
         - courses
       summary: Add new course
@@ -115,6 +123,7 @@ paths:
         - bearerAuth: []
   /courses/{courseId}:
     get:
+      operationId: getCourseById
       tags:
         - courses
       summary: Get single course
@@ -133,6 +142,7 @@ paths:
         '404':
           $ref: "#/components/responses/NotFoundError"
     patch:
+      operationId: updateCourse
       tags:
         - courses
       summary: Update single course
@@ -165,6 +175,7 @@ paths:
       security:
         - bearerAuth: []
     delete:
+      operationId: deleteCourse
       tags:
         - courses
       summary: Delete single course
@@ -188,9 +199,9 @@ paths:
           $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
-      
   /categories:
     get:
+      operationId: getCategories
       tags:
         - categories
       summary: Get all categories
@@ -201,6 +212,7 @@ paths:
         '204':
           $ref: "#/components/responses/SuccessNoContent"
     post:
+      operationId: addCategory
       tags:
         - categories
       summary: Add new category
@@ -224,6 +236,7 @@ paths:
         - bearerAuth: []
   /categories/{categoryId}:
     get:
+      operationId: getCategoryById
       tags:
         - categories
       summary: Get single category
@@ -242,12 +255,13 @@ paths:
         '404':
           $ref: "#/components/responses/NotFoundError"
     patch:
+      operationId: updateCategory
       tags:
         - categories
       summary: Update single category
       description: Returns the updated category
       parameters:
-        - name: courseId
+        - name: categoryId
           in: path
           description: ID of course to return
           required: true
@@ -274,6 +288,7 @@ paths:
       security:
         - bearerAuth: []
     delete:
+      operationId: deleteCategory
       tags:
         - categories
       summary: Delete single category
@@ -300,6 +315,7 @@ paths:
       
   /users:
     get:
+      operationId: getUsers
       tags:
         - users
       summary: Get all users
@@ -310,6 +326,7 @@ paths:
         '204':
           $ref: "#/components/responses/SuccessNoContent"
     post:
+      operationId: addUser
       tags:
         - users
       summary: Add new user
@@ -333,6 +350,7 @@ paths:
         - bearerAuth: []
   /users/{userId}:
     get:
+      operationId: getUserById
       tags:
         - users
       summary: Get single user
@@ -351,12 +369,13 @@ paths:
         '404':
           $ref: "#/components/responses/NotFoundError"
     patch:
+      operationId: updateUser
       tags:
         - users
       summary: Update single user
       description: Return the updated user
       parameters:
-        - name: courseId
+        - name: userId
           in: path
           description: ID of course to return
           required: true
@@ -383,6 +402,7 @@ paths:
       security:
         - bearerAuth: []
     delete:
+      operationId: deleteUser
       tags:
         - users
       summary: Delete single user
@@ -456,12 +476,6 @@ components:
           type: integer
           format: int64
           example: 1
-    Mentee:
-      type: object
-      properties:
-        userId:
-          type: integer
-          format: int64
     Category:
       type: object
       properties:
@@ -505,13 +519,6 @@ components:
         Negara:
           type: string
           example: Indonesia
-  requestBodies:
-    Course:
-      description: Object needed to create the course
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Course'
   securitySchemes:
     bearerAuth:
       type: http
@@ -526,3 +533,6 @@ components:
       description: Access token is missing or invalid
     ForbidenError:
       description: Token is valid but operation is not allowed
+security:
+  - bearerAuth: []
+

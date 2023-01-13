@@ -1,0 +1,6 @@
+extends:
+  - recommended
+
+apis:
+  MerkezInstitute@v1:
+    root: ./openapi/openapi.yaml
