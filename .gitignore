@@ -1,0 +1,6 @@
+*
+
+!.gitignore
+!.redocly*
+!README.md
+!openapi.yaml
