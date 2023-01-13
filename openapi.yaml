@@ -1,22 +1,22 @@
-openapi: '3.0.2'
+openapi: 3.0.2
 info:
   title: Merkez API Specification
   version: '0.1'
   description: |-
     API Specification for Merkez institute, based on [software requirements document](https://whimsical.com/software-requirements-specification-AHLth8LbaqS17rmKiEQAyd).
     This specification is the single source of truth for Merkez REST API. 
-    
+
     These links are useful to understand the api design:
     1. [RESTful web API design](https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design)
     2. [REST API Best Practices – REST Endpoint Design Examples](https://www.freecodecamp.org/news/rest-api-best-practices-rest-endpoint-design-examples/)
-  termsOfService: 'https://www.merkez.com/terms'
+  termsOfService: https://www.merkez.com/terms
   license:
     name: GNU General Public License 3.0
     url: https://www.gnu.org/licenses/gpl-3.0.html
   contact:
     name: API Support
     email: support@merkez.com
-    url: 'https://www.merkez.com/support'
+    url: https://www.merkez.com/support
 servers:
   - url: https://dev.merkez.com/v1
     description: Development Server
@@ -62,12 +62,11 @@ paths:
       description: Logout the user and return nothing
       responses:
         '204':
-          $ref: "#/components/responses/SuccessNoContent"
+          $ref: '#/components/responses/SuccessNoContent'
         '401':
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: '#/components/responses/UnauthorizedError'
       security:
         - bearerAuth: []
-      
   /auth/register:
     post:
       operationId: registerUser
@@ -97,7 +96,7 @@ paths:
         '200':
           description: successfull retrieval
         '204':
-          $ref: "#/components/responses/SuccessNoContent"
+          $ref: '#/components/responses/SuccessNoContent'
     post:
       operationId: addCourse
       tags:
@@ -118,7 +117,7 @@ paths:
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
-          $ref: "#/components/responses/ForbidenError"
+          $ref: '#/components/responses/ForbidenError'
       security:
         - bearerAuth: []
   /courses/{courseId}:
@@ -140,7 +139,7 @@ paths:
         '200':
           description: successfull retrieval
         '404':
-          $ref: "#/components/responses/NotFoundError"
+          $ref: '#/components/responses/NotFoundError'
     patch:
       operationId: updateCourse
       tags:
@@ -167,11 +166,11 @@ paths:
         '400':
           description: invalid request body
         '401':
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: '#/components/responses/UnauthorizedError'
         '403':
           $ref: '#/components/responses/ForbidenError'
         '404':
-          $ref: "#/components/responses/NotFoundError"
+          $ref: '#/components/responses/NotFoundError'
       security:
         - bearerAuth: []
     delete:
@@ -190,13 +189,13 @@ paths:
             format: int64
       responses:
         '204':
-          $ref: "#/components/responses/SuccessNoContent"
+          $ref: '#/components/responses/SuccessNoContent'
         '401':
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: '#/components/responses/UnauthorizedError'
         '403':
-          $ref: "#/components/responses/ForbidenError"
+          $ref: '#/components/responses/ForbidenError'
         '404':
-          $ref: "#/components/responses/NotFoundError"
+          $ref: '#/components/responses/NotFoundError'
       security:
         - bearerAuth: []
   /categories:
@@ -210,7 +209,7 @@ paths:
         '200':
           description: successfull retrieval
         '204':
-          $ref: "#/components/responses/SuccessNoContent"
+          $ref: '#/components/responses/SuccessNoContent'
     post:
       operationId: addCategory
       tags:
@@ -226,12 +225,12 @@ paths:
       responses:
         '201':
           description: successfull creation
-        '401':
-          $ref: "#/components/responses/UnauthorizedError"
-        '403':
-          $ref: "#/components/responses/ForbidenError"
         '400':
           description: invalid request body
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbidenError'
       security:
         - bearerAuth: []
   /categories/{categoryId}:
@@ -253,7 +252,7 @@ paths:
         '200':
           description: successfull retrieval
         '404':
-          $ref: "#/components/responses/NotFoundError"
+          $ref: '#/components/responses/NotFoundError'
     patch:
       operationId: updateCategory
       tags:
@@ -280,11 +279,11 @@ paths:
         '400':
           description: invalid request body
         '401':
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: '#/components/responses/UnauthorizedError'
         '403':
-          $ref: "#/components/responses/ForbidenError"
+          $ref: '#/components/responses/ForbidenError'
         '404':
-          $ref: "#/components/responses/NotFoundError"
+          $ref: '#/components/responses/NotFoundError'
       security:
         - bearerAuth: []
     delete:
@@ -303,16 +302,15 @@ paths:
             format: int64
       responses:
         '204':
-          $ref: "#/components/responses/SuccessNoContent"
+          $ref: '#/components/responses/SuccessNoContent'
         '401':
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: '#/components/responses/UnauthorizedError'
         '403':
-          $ref: "#/components/responses/ForbidenError"
+          $ref: '#/components/responses/ForbidenError'
         '404':
-          $ref: "#/components/responses/NotFoundError"
+          $ref: '#/components/responses/NotFoundError'
       security:
         - bearerAuth: []
-      
   /users:
     get:
       operationId: getUsers
@@ -324,7 +322,7 @@ paths:
         '200':
           description: successfull retrieval
         '204':
-          $ref: "#/components/responses/SuccessNoContent"
+          $ref: '#/components/responses/SuccessNoContent'
     post:
       operationId: addUser
       tags:
@@ -340,12 +338,12 @@ paths:
       responses:
         '201':
           description: successfull creation
-        '401':
-          $ref: "#/components/responses/UnauthorizedError"
-        '403':
-          $ref: "#/components/responses/ForbidenError"
         '400':
           description: invalid request body
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbidenError'
       security:
         - bearerAuth: []
   /users/{userId}:
@@ -367,7 +365,7 @@ paths:
         '200':
           description: successfull retrieval
         '404':
-          $ref: "#/components/responses/NotFoundError"
+          $ref: '#/components/responses/NotFoundError'
     patch:
       operationId: updateUser
       tags:
@@ -394,11 +392,11 @@ paths:
         '400':
           description: invalid request body
         '401':
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: '#/components/responses/UnauthorizedError'
         '403':
-          $ref: "#/components/responses/ForbidenError"
+          $ref: '#/components/responses/ForbidenError'
         '404':
-          $ref: "#/components/responses/NotFoundError"
+          $ref: '#/components/responses/NotFoundError'
       security:
         - bearerAuth: []
     delete:
@@ -417,17 +415,50 @@ paths:
             format: int64
       responses:
         '204':
-          $ref: "#/components/responses/SuccessNoContent"
+          $ref: '#/components/responses/SuccessNoContent'
         '401':
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: '#/components/responses/UnauthorizedError'
         '403':
-          $ref: "#/components/responses/ForbidenError"
+          $ref: '#/components/responses/ForbidenError'
         '404':
-          $ref: "#/components/responses/NotFoundError"
+          $ref: '#/components/responses/NotFoundError'
       security:
         - bearerAuth: []
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    SuccessNoContent:
+      description: Successfull operation (no content to return)
+    UnauthorizedError:
+      description: Access token is missing or invalid
+    ForbidenError:
+      description: Token is valid but operation is not allowed
+    NotFoundError:
+      description: Not found / invalid resource ID
   schemas:
+    Address:
+      type: object
+      properties:
+        jalan:
+          type: string
+          example: Jl. Soekarno hatta
+        kecamatan:
+          type: string
+          example: Tanah Abang
+        kabupaten:
+          type: string
+          description: kabupaten atau kota
+          example: ponorogo
+        provinsi:
+          type: string
+          example: Jawa Barat
+        Negara:
+          type: string
+          example: Indonesia
     User:
       type: object
       properties:
@@ -500,39 +531,4 @@ components:
           $ref: '#/components/schemas/Mentor'
         category:
           $ref: '#/components/schemas/Category'
-    Address:
-      type: object
-      properties:
-        jalan:
-          type: string
-          example: Jl. Soekarno hatta
-        kecamatan:
-          type: string
-          example: Tanah Abang
-        kabupaten:
-          type: string
-          description: kabupaten atau kota
-          example: ponorogo
-        provinsi:
-          type: string
-          example: Jawa Barat
-        Negara:
-          type: string
-          example: Indonesia
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-  responses:
-    SuccessNoContent:
-      description: Successfull operation (no content to return)
-    NotFoundError:
-      description: Not found / invalid resource ID
-    UnauthorizedError:
-      description: Access token is missing or invalid
-    ForbidenError:
-      description: Token is valid but operation is not allowed
-security:
-  - bearerAuth: []
-
+security: []

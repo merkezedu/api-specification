@@ -1,0 +1,8 @@
+# Everything will be ignore, except whitelisted items
+
+*
+
+!.gitignore
+!.redocly*
+!README.md
+!openapi.yaml
