@@ -1,3 +1,5 @@
+# Everything will be ignore, except whitelisted items
+
 *
 
 !.gitignore
