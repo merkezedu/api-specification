@@ -13,3 +13,25 @@ If you use VSCode as IDE, you can use [OpenAPI (Swagger) Editor](https://marketp
 ### Another way
 
 You can use [Swagger UI](https://swagger.io/tools/swagger-ui/download/) to visualize and use [Swagger Editor](https://swagger.io/tools/swagger-editor/download/) to edit the specification.
+
+# Linting, and Bundling API Specification
+
+You need to install [Redocly CLI](https://redocly.com/docs/cli/installation/) globally to lint, bundle, and manage the api specification.
+
+## Linting
+
+```bash
+redocly lint openapi.yaml
+```
+
+Above command will validate the openapi.yaml file against the rules describeb in .redocly.yaml.
+
+_Note: you can ignore warning or error from linting result in .redocly.lint-ignore.yaml_
+
+## Bundling
+
+Combine the multi-file definition into single openapi.yaml file.
+
+```bash
+redocly bundle vBeta/openapi.yaml -o openapi_beta.yaml
+```
