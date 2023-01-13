@@ -1,0 +1,17 @@
+post:
+  operationId: registerUser
+  tags:
+    - auth
+  summary: Register the user
+  description: Return the data of the registered user
+  requestBody:
+    description: Object needed to register the user
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/User.yaml
+  responses:
+    '201':
+      description: successfull registration and creation of user
+    '400':
+      description: invalid request body
