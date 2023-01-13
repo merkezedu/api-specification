@@ -531,5 +531,4 @@ components:
           $ref: '#/components/schemas/Mentor'
         category:
           $ref: '#/components/schemas/Category'
-security:
-  - bearerAuth: []
+security: []
