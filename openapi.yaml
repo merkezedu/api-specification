@@ -37,20 +37,18 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                username:
-                  type: string
-                  example: johndoe
-                password:
-                  type: string
-                  example: secret123
-                confirmPassword:
-                  type: string
-                  example: secret123
+              $ref: '#/components/schemas/UserLogin'
       responses:
         '200':
           description: successfull login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
         '401':
           description: bad credential
   /auth/logout:
@@ -79,7 +77,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserRegister'
       responses:
         '201':
           description: successfull registration and creation of user
@@ -321,6 +319,12 @@ paths:
       responses:
         '200':
           description: successfull retrieval
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
         '204':
           $ref: '#/components/responses/SuccessNoContent'
     post:
@@ -385,7 +389,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              allOf:
+                - $ref: '#/components/schemas/UserEditable'
       responses:
         '200':
           description: successfull update
@@ -430,16 +435,16 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-  responses:
-    SuccessNoContent:
-      description: Successfull operation (no content to return)
-    UnauthorizedError:
-      description: Access token is missing or invalid
-    ForbidenError:
-      description: Token is valid but operation is not allowed
-    NotFoundError:
-      description: Not found / invalid resource ID
   schemas:
+    UserLogin:
+      type: object
+      properties:
+        email:
+          type: string
+          example: iqbal.adudu@gmail.com
+        password:
+          type: string
+          example: secret123
     Address:
       type: object
       properties:
@@ -459,31 +464,15 @@ components:
         Negara:
           type: string
           example: Indonesia
-    User:
+    UserEditable:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-        email:
-          type: string
-          example: iqbal.adudu@gmail.com
-        password:
-          type: string
-          example: secret123
-        username:
-          type: string
-          example: iqbaladudu
         firstName:
           type: string
           example: iqbal
         lastName:
           type: string
           example: adudu
-        phone:
-          type: string
-          example: '08123456789'
         gender:
           type: string
           enum:
@@ -495,11 +484,18 @@ components:
           example: 01/01/1999
         address:
           $ref: '#/components/schemas/Address'
-        userStatus:
-          type: string
-          enum:
-            - active
-            - inactive
+    UserRegister:
+      allOf:
+        - $ref: '#/components/schemas/UserLogin'
+        - type: object
+          properties:
+            username:
+              type: string
+              example: iqbaladudu
+            phone:
+              type: string
+              example: '08123456789'
+        - $ref: '#/components/schemas/UserEditable'
     Mentor:
       type: object
       properties:
@@ -531,4 +527,28 @@ components:
           $ref: '#/components/schemas/Mentor'
         category:
           $ref: '#/components/schemas/Category'
+    User:
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              example: 1
+            userStatus:
+              type: string
+              enum:
+                - active
+                - inactive
+        - $ref: '#/components/schemas/UserLogin'
+        - $ref: '#/components/schemas/UserRegister'
+  responses:
+    SuccessNoContent:
+      description: Successfull operation (no content to return)
+    UnauthorizedError:
+      description: Access token is missing or invalid
+    ForbidenError:
+      description: Token is valid but operation is not allowed
+    NotFoundError:
+      description: Not found / invalid resource ID
 security: []
