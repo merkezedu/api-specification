@@ -5,3 +5,12 @@ openapi.yaml:
     - '#/paths/~1courses/get/responses'
     - '#/paths/~1categories/get/responses'
     - '#/paths/~1users/get/responses'
+vBeta/paths/courses.yaml:
+  operation-4xx-response:
+    - '#/get/responses'
+vBeta/paths/categories.yaml:
+  operation-4xx-response:
+    - '#/get/responses'
+vBeta/paths/users.yaml:
+  operation-4xx-response:
+    - '#/get/responses'
