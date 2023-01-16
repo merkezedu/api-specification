@@ -6,9 +6,7 @@
 
 This is repository to store all Merkez api specifications. This repo is read-only by default except for those who have admin role.
 
-**The actual API specification is `openapi.yaml`**, the other files are needed for API designing purpose.
-
-You can choose API version by selecting the specific branch, branch `main` contains the latest version of the API specification.
+**The actual API specification is `openapi.yaml`**, the other files are needed for API designing purpose. You can choose API version by selecting the specific branch.
 
 ## Visualize and/or Edit API Specification
 
