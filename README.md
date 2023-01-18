@@ -8,6 +8,10 @@ This is repository to store all Merkez api specifications. This repo is read-onl
 
 **The actual API specification is `openapi.yaml`**, the other files are needed for API designing purpose. You can choose API version by selecting the specific branch.
 
+For API consumer, you can click link [above](https://merkezedu.github.io/api-specification/) to visualize the API definition or you can keep read the guides below to contribute to API.
+
+# Guide For API Designer
+
 ## Visualize and/or Edit API Specification
 
 If you use VSCode as IDE, you can use [OpenAPI (Swagger) Editor](https://marketplace.visualstudio.com/items?itemName=42Crunch.vscode-openapi) VSCode Extension to visualize and edit the specification
