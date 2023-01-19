@@ -529,7 +529,7 @@ components:
             phone:
               type: string
               example: '08123456789'
-    Assets:
+    CourseAssets:
       type: object
       properties:
         id:
@@ -549,7 +549,7 @@ components:
         url:
           type: string
           example: https://my-bucket.s3.us-west-2.amazonaws.com
-    Content:
+    CourseContent:
       type: object
       properties:
         id:
@@ -569,8 +569,8 @@ components:
         assets:
           type: array
           items:
-            $ref: '#/components/schemas/Assets'
-    Module:
+            $ref: '#/components/schemas/CourseAssets'
+    CourseModule:
       type: object
       properties:
         id:
@@ -587,7 +587,7 @@ components:
         contents:
           type: array
           items:
-            $ref: '#/components/schemas/Content'
+            $ref: '#/components/schemas/CourseContent'
         createdAt:
           type: string
           example: 01/01/2023
@@ -633,7 +633,7 @@ components:
         modules:
           type: array
           items:
-            $ref: '#/components/schemas/Module'
+            $ref: '#/components/schemas/CourseModule'
         createdAt:
           type: string
           example: 01/01/2023
