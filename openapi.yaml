@@ -298,6 +298,47 @@ paths:
           $ref: '#/components/responses/NotFoundError'
       security:
         - bearerAuth: []
+  /courses/{courseId}/modules:
+    get:
+      operationId: getCourseModules
+      tags:
+        - course/modules
+      summary: Get collections of module
+      description: Returns all module collections of specific course
+      parameters:
+        - name: courseId
+          in: path
+          description: ID of course of modules to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: succesful retrieval
+    post:
+      operationId: createCourseModule
+      tags:
+        - course/modules
+      summary: Create new module of specific course
+      description: Returns the created course module
+      parameters:
+        - name: courseId
+          in: path
+          description: ID of course to create new module from
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Object needed to create new module
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourseModule'
+      responses:
+        '200':
+          description: succesful retrieval
   /categories:
     get:
       operationId: getCategories
@@ -754,6 +795,78 @@ components:
               type: string
               example: 02/01/2023
               readOnly: true
+    CourseAssets:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        contentId:
+          type: integer
+          format: int64
+          example: 1
+        mediaType:
+          type: string
+          enum:
+            - document
+            - image
+            - video
+        url:
+          type: string
+          example: https://my-bucket.s3.us-west-2.amazonaws.com
+    CourseContent:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        title:
+          type: string
+          example: Pengertian Grammar
+        description:
+          type: string
+          example: Grammar adalah himpunan dari aturan-aturan yang terstruktur yang mengatur susunan kalimat, frase, dan kata dalam bahasa apapun.
+        moduleId:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourseAssets'
+    CourseModule:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        title:
+          type: string
+          example: Grammar
+        courseId:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourseContent'
+          readOnly: true
+        createdAt:
+          type: string
+          example: 01/01/2023
+          readOnly: true
+        updatedAt:
+          type: string
+          example: 02/01/2023
+          readOnly: true
     Course:
       type: object
       properties:
@@ -788,6 +901,10 @@ components:
           type: integer
           format: int64
           example: 2
+        modules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourseModule'
         createdAt:
           type: string
           example: 01/01/2023
@@ -795,73 +912,6 @@ components:
         updatedAt:
           type: integer
           example: 01/01/2023
-          readOnly: true
-    CourseAssets:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-        contentId:
-          type: integer
-          format: int64
-          example: 1
-        mediaType:
-          type: string
-          enum:
-            - document
-            - image
-            - video
-        url:
-          type: string
-          example: https://my-bucket.s3.us-west-2.amazonaws.com
-    CourseContent:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-        title:
-          type: string
-          example: Grammar
-        description:
-          type: string
-          example: Grammar adalah himpunan dari aturan-aturan yang terstruktur yang mengatur susunan kalimat, frase, dan kata dalam bahasa apapun.
-        moduleId:
-          type: integer
-          format: int64
-          example: 1
-        assets:
-          type: array
-          items:
-            $ref: '#/components/schemas/CourseAssets'
-    CourseModule:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-        title:
-          type: string
-          example: Grammar
-        courseId:
-          type: integer
-          format: int64
-          example: 1
-        contents:
-          type: array
-          items:
-            $ref: '#/components/schemas/CourseContent'
-        createdAt:
-          type: string
-          example: 01/01/2023
-          readOnly: true
-        updatedAt:
-          type: string
-          example: 02/01/2023
           readOnly: true
     Category:
       type: object
