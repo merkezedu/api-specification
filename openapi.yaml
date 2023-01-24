@@ -302,7 +302,7 @@ paths:
     get:
       operationId: getCourseModules
       tags:
-        - course/modules
+        - modules
       summary: Get collections of module
       description: Returns all module collections of specific course
       parameters:
@@ -319,7 +319,7 @@ paths:
     post:
       operationId: createCourseModule
       tags:
-        - course/modules
+        - modules
       summary: Create new module of specific course
       description: Returns the created course module
       parameters:
@@ -339,6 +339,286 @@ paths:
       responses:
         '200':
           description: succesful retrieval
+  /courses/{courseId}/modules/{moduleId}:
+    get:
+      operationId: getCourseModuleById
+      tags:
+        - modules
+      summary: Get single module
+      description: Returns single module
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successfull retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseModule'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    patch:
+      operationId: updateModule
+      tags:
+        - modules
+      summary: Update single user
+      description: Return the updated user
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Object needed to update existing user
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/Profile'
+      responses:
+        '200':
+          description: successfull update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '400':
+          description: invalid request body
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbidenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - bearerAuth: []
+    delete:
+      operationId: deleteModule
+      tags:
+        - modules
+      summary: Delete single module
+      description: Returns nothing when moduel is deleted successfully
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          $ref: '#/components/responses/SuccessNoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbidenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - bearerAuth: []
+  /courses/{courseId}/modules/{moduleId}/contents:
+    get:
+      operationId: getContents
+      tags:
+        - contents
+      summary: Get collections of module content
+      description: Returns all content collections of specific module course
+      parameters:
+        - name: courseId
+          in: path
+          description: ID of course of modules to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: moduleId
+          in: path
+          description: ID of content of module to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: succesful retrieval
+    post:
+      operationId: createContent
+      tags:
+        - contents
+      summary: Create new content of specific course module
+      description: Returns the created content module
+      parameters:
+        - name: courseId
+          in: path
+          description: ID of course to create new module from
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: moduleId
+          in: path
+          description: ID of content of module to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Object needed to create new content
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourseContent'
+      responses:
+        '200':
+          description: succesful retrieval
+  /courses/{courseId}/modules/{moduleId}/contents/{contentId}:
+    get:
+      operationId: getContentById
+      tags:
+        - contents
+      summary: Get single content
+      description: Returns single content
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: contentId
+          in: path
+          description: ID of content to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successfull retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseContent'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    patch:
+      operationId: updateContent
+      tags:
+        - contents
+      summary: Update single content
+      description: Return the updated content
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: contentId
+          in: path
+          description: ID of content to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Object needed to update existing content
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CourseContent'
+      responses:
+        '200':
+          description: successfull update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseContent'
+        '400':
+          description: invalid request body
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbidenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - bearerAuth: []
+    delete:
+      operationId: deleteContent
+      tags:
+        - contents
+      summary: Delete single content
+      description: Returns nothing when content is deleted successfully
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: contentId
+          in: path
+          description: ID of content to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          $ref: '#/components/responses/SuccessNoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbidenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - bearerAuth: []
   /categories:
     get:
       operationId: getCategories
@@ -913,36 +1193,6 @@ components:
           type: integer
           example: 01/01/2023
           readOnly: true
-    Category:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          readOnly: true
-        name:
-          type: string
-          example: Hard Skill
-        createdAt:
-          type: string
-          example: 01/01/2023
-          readOnly: true
-        updatedAt:
-          type: string
-          example: 01/01/2023
-          readOnly: true
-    UserRole:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          readOnly: true
-        name:
-          type: string
-          example: admin
     Address:
       type: object
       properties:
@@ -989,6 +1239,36 @@ components:
               type: integer
               format: int64
               example: 1
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        name:
+          type: string
+          example: Hard Skill
+        createdAt:
+          type: string
+          example: 01/01/2023
+          readOnly: true
+        updatedAt:
+          type: string
+          example: 01/01/2023
+          readOnly: true
+    UserRole:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        name:
+          type: string
+          example: admin
   responses:
     SuccessNoContent:
       description: Successfull operation (no content to return)
