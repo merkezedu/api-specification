@@ -313,6 +313,8 @@ paths:
                   $ref: '#/components/schemas/User'
         '204':
           $ref: '#/components/responses/SuccessNoContent'
+      security:
+        - bearerAuth: []
     post:
       operationId: addUser
       tags:
@@ -366,6 +368,8 @@ paths:
                   - $ref: '#/components/schemas/User'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      security:
+        - bearerAuth: []
     patch:
       operationId: updateUser
       tags:
