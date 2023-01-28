@@ -593,6 +593,101 @@ paths:
           $ref: '#/components/responses/NotFoundError'
       security:
         - bearerAuth: []
+  /orders:
+    get:
+      operationId: getOrders
+      tags:
+        - orders
+      summary: Get collections of orders
+      description: Returns collections of orders
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: integer
+            format: int64
+          example: 1
+        - name: courseId
+          in: query
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        '200':
+          description: successfull retrieval
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Progress'
+        '204':
+          $ref: '#/components/responses/SuccessNoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbidenError'
+      security:
+        - bearerAuth: []
+    post:
+      operationId: addOrder
+      tags:
+        - orders
+      summary: Add new order
+      description: Returns the created order
+      requestBody:
+        description: Object needed to create new order
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          description: successfull creation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbidenError'
+      security:
+        - bearerAuth: []
+  /orders/{orderId}:
+    get:
+      operationId: getOrderById
+      tags:
+        - orders
+      summary: Get single order
+      description: Returns single order
+      parameters:
+        - name: orderId
+          in: path
+          description: ID of order to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        '200':
+          description: successfull retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbidenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - bearerAuth: []
   /courses:
     get:
       operationId: getCourses
@@ -1359,6 +1454,30 @@ components:
             type: integer
             format: int64
             default: 'null'
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        userId:
+          type: integer
+          format: int64
+          example: 1
+        courseId:
+          type: integer
+          format: int64
+          example: 1
+        status:
+          type: string
+          enum:
+            - pending
+            - failed
+            - success
+          default: pending
+          readOnly: true
     CourseModule:
       type: object
       properties:
