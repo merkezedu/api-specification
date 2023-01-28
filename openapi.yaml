@@ -1454,6 +1454,30 @@ components:
             type: integer
             format: int64
             default: 'null'
+    OrderItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        orderId:
+          type: integer
+          format: int64
+          example: 1
+        courseId:
+          type: integer
+          format: int64
+          example: 1
+        courseTypeId:
+          type: integer
+          format: int64
+          example: 1
+        price:
+          type: number
+          format: float
+          example: 10.5
     Order:
       type: object
       properties:
@@ -1466,10 +1490,10 @@ components:
           type: integer
           format: int64
           example: 1
-        courseId:
-          type: integer
-          format: int64
-          example: 1
+        orderItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
         status:
           type: string
           enum:
@@ -1477,6 +1501,14 @@ components:
             - failed
             - success
           default: pending
+          readOnly: true
+        createdAt:
+          type: string
+          example: 01/01/2023
+          readOnly: true
+        updatedAt:
+          type: string
+          example: 01/01/2023
           readOnly: true
     CourseModule:
       type: object
