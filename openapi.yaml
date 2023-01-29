@@ -705,7 +705,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Course'
+                  $ref: '#/components/schemas/CourseSimple'
         '204':
           $ref: '#/components/responses/SuccessNoContent'
     post:
@@ -845,11 +845,15 @@ paths:
       responses:
         '200':
           description: succesful retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseModule'
     post:
       operationId: createModule
       tags:
         - modules
-      summary: Create new module of specific course
+      summary: Create new module
       description: Returns the created course module
       parameters:
         - name: courseId
@@ -891,7 +895,7 @@ paths:
       operationId: getModuleById
       tags:
         - modules
-      summary: Get single module
+      summary: Get module
       description: Returns single module
       parameters:
         - name: courseId
@@ -926,7 +930,7 @@ paths:
       operationId: updateModule
       tags:
         - modules
-      summary: Update single module
+      summary: Update module
       description: Return the updated module
       parameters:
         - name: courseId
@@ -969,8 +973,8 @@ paths:
       operationId: deleteModule
       tags:
         - modules
-      summary: Delete single module
-      description: Returns nothing when moduel is deleted successfully
+      summary: Delete module
+      description: Returns nothing when module is deleted successfully
       parameters:
         - name: courseId
           in: path
@@ -1000,8 +1004,8 @@ paths:
       operationId: getContents
       tags:
         - contents
-      summary: Get collections of module content
-      description: Returns all content collections of specific module course
+      summary: Get collections of content
+      description: Returns collections of content
       parameters:
         - name: courseId
           in: path
@@ -1023,13 +1027,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/CourseContent'
+                  $ref: '#/components/schemas/CourseContentSimple'
     post:
       operationId: createContent
       tags:
         - contents
-      summary: Create new content of specific course module
-      description: Returns the created content module
+      summary: Create new content
+      description: Returns the created content
       parameters:
         - name: courseId
           in: path
@@ -1069,7 +1073,7 @@ paths:
       operationId: getContentById
       tags:
         - contents
-      summary: Get single content
+      summary: Get content and assets detail
       description: Returns single content
       parameters:
         - name: courseId
@@ -1103,7 +1107,7 @@ paths:
       operationId: updateContent
       tags:
         - contents
-      summary: Update single content
+      summary: Update content
       description: Return the updated content
       parameters:
         - name: courseId
@@ -1125,7 +1129,7 @@ paths:
             type: integer
             format: int64
       requestBody:
-        description: Object needed to update existing content
+        description: If you provide new assets field, the previous assets will be overwritten or deleted
         content:
           application/json:
             schema:
@@ -1152,8 +1156,8 @@ paths:
       operationId: deleteContent
       tags:
         - contents
-      summary: Delete single content
-      description: Returns nothing when content is deleted successfully
+      summary: Delete content and assets
+      description: Returns nothing when content and it's assets are deleted successfully
       parameters:
         - name: courseId
           in: path
@@ -1446,6 +1450,137 @@ paths:
           $ref: '#/components/responses/NotFoundError'
       security:
         - bearerAuth: []
+  /assets:
+    get:
+      operationId: getAssets
+      tags:
+        - assets
+      summary: Get all assets detail
+      description: Returns all assets detail
+      responses:
+        '200':
+          description: successfull retrieval
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CourseAsset'
+        '204':
+          $ref: '#/components/responses/SuccessNoContent'
+    post:
+      operationId: addAsset
+      tags:
+        - assets
+      summary: Add new asset
+      description: Returns the created asset detail
+      requestBody:
+        description: multipart/form-data needed to create new course type
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CourseAsset'
+      responses:
+        '201':
+          description: successfull creation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseAsset'
+        '400':
+          description: invalid request body
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbidenError'
+      security:
+        - bearerAuth: []
+  /assets/{assetId}:
+    get:
+      operationId: getAssetById
+      tags:
+        - assets
+      summary: Get asset detail
+      description: Returns single asset detail
+      parameters:
+        - name: assetId
+          in: path
+          description: ID of asset detail to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successfull retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseAsset'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    patch:
+      operationId: updateAsset
+      tags:
+        - assets
+      summary: Update asset detail
+      description: Returns the updated asset detail
+      parameters:
+        - name: assetId
+          in: path
+          description: ID of asset detail to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Object needed to update existing asset detail
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourseAsset'
+      responses:
+        '200':
+          description: successfull update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseAsset'
+        '400':
+          description: invalid request body
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbidenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - bearerAuth: []
+    delete:
+      operationId: deleteAsset
+      tags:
+        - assets
+      summary: Delete asset
+      description: Returns nothing when asset and it's detail is deleted successfully
+      parameters:
+        - name: assetId
+          in: path
+          description: ID of asset to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          $ref: '#/components/responses/SuccessNoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbidenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - bearerAuth: []
 components:
   securitySchemes:
     bearerAuth:
@@ -1651,120 +1786,6 @@ components:
           type: string
           example: 01/01/2023
           readOnly: true
-    CourseModule:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          readOnly: true
-        title:
-          type: string
-          example: Grammar
-        courseId:
-          type: integer
-          format: int64
-          example: 1
-          readOnly: true
-        createdAt:
-          type: string
-          example: 01/01/2023
-          readOnly: true
-        updatedAt:
-          type: string
-          example: 02/01/2023
-          readOnly: true
-    Course:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          readOnly: true
-        title:
-          type: string
-          example: Kursus Bahasa Inggris
-        description:
-          type: string
-          example: Kursus bahasa inggris dengan metode paling mutakhir.
-        price:
-          type: number
-          format: float
-          example: 10.5
-        duration:
-          type: string
-          example: 10 hours
-        courseTypes:
-          type: string
-          enum:
-            - Freemium
-            - Premium
-        userId:
-          type: integer
-          format: int64
-          example: 10
-        categoryId:
-          type: integer
-          format: int64
-          example: 2
-        modules:
-          type: array
-          items:
-            $ref: '#/components/schemas/CourseModule'
-        createdAt:
-          type: string
-          example: 01/01/2023
-          readOnly: true
-        updatedAt:
-          type: integer
-          example: 01/01/2023
-          readOnly: true
-    CourseAssets:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          readOnly: true
-        contentId:
-          type: integer
-          format: int64
-          example: 1
-        mediaType:
-          type: string
-          enum:
-            - document
-            - image
-            - video
-        url:
-          type: string
-          example: https://my-bucket.s3.us-west-2.amazonaws.com
-    CourseContent:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          readOnly: true
-        title:
-          type: string
-          example: Pengertian Grammar
-        description:
-          type: string
-          example: Grammar adalah himpunan dari aturan-aturan yang terstruktur yang mengatur susunan kalimat, frase, dan kata dalam bahasa apapun.
-        moduleId:
-          type: integer
-          format: int64
-          example: 1
-          readOnly: true
-        assets:
-          type: array
-          items:
-            $ref: '#/components/schemas/CourseAssets'
     CourseType:
       type: object
       properties:
@@ -1803,6 +1824,183 @@ components:
           type: string
           example: 01/01/2023
           readOnly: true
+    CourseSimple:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        title:
+          type: string
+          example: Kursus Bahasa Inggris
+        price:
+          type: number
+          format: float
+          example: 10.5
+        duration:
+          type: string
+          example: 10 hours
+        courseTypeId:
+          type: integer
+          format: int64
+          example: 1
+          writeOnly: true
+        courseType:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/CourseType'
+        mentorId:
+          type: integer
+          format: int64
+          example: 1
+          writeOnly: true
+        mentor:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/User'
+        categoryId:
+          type: integer
+          format: int64
+          example: 2
+          writeOnly: true
+        category:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/Category'
+        totalModules:
+          type: integer
+          format: int64
+          example: 15
+          readOnly: true
+        createdAt:
+          type: string
+          example: 01/01/2023
+          readOnly: true
+        updatedAt:
+          type: integer
+          example: 01/01/2023
+          readOnly: true
+    CourseContentSimple:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        title:
+          type: string
+          example: Pengertian Grammar
+        moduleId:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        createdAt:
+          type: string
+          example: 01/01/2023
+        updatedAt:
+          type: string
+          example: 01/01/2023
+    CourseAsset:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        user:
+          allOf:
+            - $ref: '#/components/schemas/User'
+          readOnly: true
+        name:
+          type: string
+          example: Video kursus 1
+        mediaType:
+          type: string
+          enum:
+            - document
+            - image
+            - video
+          readOnly: true
+        url:
+          type: string
+          example: https://my-bucket.s3.us-west-2.amazonaws.com
+          readOnly: true
+        file:
+          type: string
+          format: binary
+          writeOnly: true
+    CourseContent:
+      allOf:
+        - $ref: '#/components/schemas/CourseContentSimple'
+        - type: object
+          properties:
+            description:
+              type: string
+              example: Grammar adalah himpunan dari aturan-aturan yang terstruktur yang mengatur susunan kalimat, frase, dan kata dalam bahasa apapun.
+            assetsId:
+              writeOnly: true
+              type: array
+              items:
+                type: integer
+                format: int64
+                example: 1
+            assets:
+              readOnly: true
+              type: array
+              items:
+                $ref: '#/components/schemas/CourseAsset'
+    CourseModule:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        title:
+          type: string
+          example: Grammar
+        cover:
+          type: string
+          example: https://my-bucket.s3.us-west-2.amazonaws.com
+        courseId:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        contents:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/CourseContent'
+          default: []
+        createdAt:
+          type: string
+          example: 01/01/2023
+          readOnly: true
+        updatedAt:
+          type: string
+          example: 02/01/2023
+          readOnly: true
+    Course:
+      allOf:
+        - $ref: '#/components/schemas/CourseSimple'
+        - type: object
+          properties:
+            description:
+              type: string
+              example: Kursus bahasa inggris dengan metode paling mutakhir.
+            modules:
+              readOnly: true
+              type: array
+              items:
+                $ref: '#/components/schemas/CourseModule'
+              default: []
   responses:
     SuccessNoContent:
       description: Successfull operation (no content to return)
