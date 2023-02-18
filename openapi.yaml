@@ -287,8 +287,12 @@ paths:
             type: integer
             format: int64
       responses:
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
+        '200':
+          description: succesful retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRole'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -313,8 +317,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
       security:
         - bearerAuth: []
     post:
@@ -368,6 +372,8 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/Profile'
                   - $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
       security:
@@ -425,8 +431,14 @@ paths:
             type: integer
             format: int64
       responses:
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
+        '200':
+          description: successfull retrieval
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Profile'
+                  - $ref: '#/components/schemas/User'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -465,8 +477,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Progress'
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -585,8 +595,12 @@ paths:
             format: int64
           example: 1
       responses:
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
+        '200':
+          description: successfull retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Progress'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -624,8 +638,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Progress'
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -706,8 +718,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CourseSimple'
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
     post:
       operationId: addCourse
       tags:
@@ -818,8 +828,19 @@ paths:
             type: integer
             format: int64
       responses:
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
+        '200':
+          description: successfull retrieval
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Course'
+                  - type: object
+                    properties:
+                      modules:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CourseModule'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -989,8 +1010,19 @@ paths:
             type: integer
             format: int64
       responses:
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
+        '200':
+          description: successfull retrieval
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/CourseModule'
+                  - type: object
+                    properties:
+                      contents:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CourseContent'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -1178,9 +1210,12 @@ paths:
             type: integer
             format: int64
       responses:
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
-        '401':
+        '200':
+          description: successfull deletion
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/CourseContent.yaml
           $ref: '#/components/responses/UnauthorizedError'
         '403':
           $ref: '#/components/responses/ForbidenError'
@@ -1204,8 +1239,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CourseType'
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
     post:
       operationId: addCourseType
       tags:
@@ -1309,8 +1342,12 @@ paths:
             type: integer
             format: int64
       responses:
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
+        '200':
+          description: successfull retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseType'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -1335,8 +1372,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Category'
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
     post:
       operationId: addCategory
       tags:
@@ -1440,8 +1475,12 @@ paths:
             type: integer
             format: int64
       responses:
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
+        '200':
+          description: successfull deletion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -1466,8 +1505,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CourseAsset'
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
     post:
       operationId: addAsset
       tags:
@@ -1571,8 +1608,12 @@ paths:
             type: integer
             format: int64
       responses:
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
+        '200':
+          description: successfull deletion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseAsset'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
