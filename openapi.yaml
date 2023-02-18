@@ -319,6 +319,8 @@ paths:
                   $ref: '#/components/schemas/User'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbidenError'
       security:
         - bearerAuth: []
     post:
@@ -374,6 +376,8 @@ paths:
                   - $ref: '#/components/schemas/User'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbidenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
       security:
@@ -399,6 +403,7 @@ paths:
             schema:
               allOf:
                 - $ref: '#/components/schemas/Profile'
+                - $ref: '#/components/schemas/User'
       responses:
         '200':
           description: successfull update
@@ -1743,6 +1748,7 @@ components:
               type: integer
               format: int64
               example: 1
+              readOnly: true
     Progress:
       type: object
       properties:
