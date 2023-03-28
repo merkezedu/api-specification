@@ -334,7 +334,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Profile'
+              $ref: '#/components/schemas/User'
       responses:
         '201':
           description: successfull creation
@@ -372,8 +372,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/Profile'
                   - $ref: '#/components/schemas/User'
+                  - $ref: '#/components/schemas/Profile'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -410,7 +410,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Profile'
+                allOf:
+                  - $ref: '#/components/schemas/Profile'
+                  - $ref: '#/components/schemas/User'
         '400':
           description: invalid request body
         '401':
