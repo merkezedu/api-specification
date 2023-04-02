@@ -277,7 +277,7 @@ paths:
       tags:
         - roles
       summary: Delete role
-      description: Returns nothing when deleting is success
+      description: Returns the deleted role
       parameters:
         - name: roleId
           in: path
@@ -428,7 +428,7 @@ paths:
       tags:
         - users
       summary: Delete single user
-      description: Returns nothing when user is deleted successfully
+      description: Returns the deleted user
       parameters:
         - name: userId
           in: path
@@ -591,7 +591,7 @@ paths:
       tags:
         - progress
       summary: Delete the progress
-      description: Returns nothing when progress is deleted successfully
+      description: Returns the deleted progress
       parameters:
         - name: progressId
           in: path
@@ -825,7 +825,7 @@ paths:
       tags:
         - courses
       summary: Delete single course
-      description: Returns nothing when course is deleted successfully
+      description: Returns the deleted course
       parameters:
         - name: courseId
           in: path
@@ -1002,7 +1002,7 @@ paths:
       tags:
         - modules
       summary: Delete module
-      description: Returns nothing when module is deleted successfully
+      description: Returns the deleted module
       parameters:
         - name: courseId
           in: path
@@ -1196,7 +1196,7 @@ paths:
       tags:
         - contents
       summary: Delete content and assets
-      description: Returns nothing when content and it's assets are deleted successfully
+      description: Returns the deleted content
       parameters:
         - name: courseId
           in: path
@@ -1339,7 +1339,7 @@ paths:
       tags:
         - course types
       summary: Delete course type
-      description: Returns nothing when course type is deleted successfully
+      description: Returns the deleted course type
       parameters:
         - name: courseTypeId
           in: path
@@ -1472,7 +1472,7 @@ paths:
       tags:
         - categories
       summary: Delete category
-      description: Returns nothing when category is deleted successfully
+      description: Returns the deleted category
       parameters:
         - name: categoryId
           in: path
@@ -1605,7 +1605,7 @@ paths:
       tags:
         - assets
       summary: Delete asset
-      description: Returns nothing when asset and it's detail is deleted successfully
+      description: Returns the deleted asset
       parameters:
         - name: assetId
           in: path
