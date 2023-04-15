@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
   title: Merkez API Specification
-  version: '0.1'
+  version: "0.1"
   description: |-
     API Specification for Merkez institute, based on [software requirements document](https://whimsical.com/software-requirements-specification-AHLth8LbaqS17rmKiEQAyd).
     This specification is the single source of truth for Merkez REST API. 
@@ -37,9 +37,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserLogin'
+              $ref: "#/components/schemas/UserLogin"
       responses:
-        '200':
+        "200":
           description: successfull login
           content:
             application/json:
@@ -49,7 +49,7 @@ paths:
                   token:
                     type: string
                     example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-        '401':
+        "401":
           description: bad credential
   /auth/logout:
     get:
@@ -59,10 +59,10 @@ paths:
       summary: Logout the current login user
       description: Logout the user and return nothing
       responses:
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+        "204":
+          $ref: "#/components/responses/SuccessNoContent"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
       security:
         - bearerAuth: []
   /auth/register:
@@ -77,15 +77,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
       responses:
-        '201':
+        "201":
           description: successfull registration and creation of user
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-        '400':
+                $ref: "#/components/schemas/User"
+        "400":
           description: invalid request body
   /auth/password/recover:
     post:
@@ -105,10 +105,10 @@ paths:
                   type: string
                   example: john.doe@gmail.com
       responses:
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+        "204":
+          $ref: "#/components/responses/SuccessNoContent"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
     patch:
       operationId: resetPassword
       tags:
@@ -129,9 +129,9 @@ paths:
                   type: string
                   example: secret321
       responses:
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
-        '400':
+        "204":
+          $ref: "#/components/responses/SuccessNoContent"
+        "400":
           description: bad request
   /auth/password/change:
     patch:
@@ -154,9 +154,9 @@ paths:
                   type: string
                   example: secret321
       responses:
-        '204':
-          $ref: '#/components/responses/SuccessNoContent'
-        '400':
+        "204":
+          $ref: "#/components/responses/SuccessNoContent"
+        "400":
           description: bad request (wrong old password)
       security:
         - bearerAuth: []
@@ -168,16 +168,16 @@ paths:
       summary: Get collections of roles
       description: Returns collections of roles
       responses:
-        '200':
+        "200":
           description: succesful retrieval
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserRole'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
+                $ref: "#/components/schemas/UserRole"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
       security:
         - bearerAuth: []
     post:
@@ -191,18 +191,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserRole'
+              $ref: "#/components/schemas/UserRole"
       responses:
-        '201':
+        "201":
           description: successfully created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserRole'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
+                $ref: "#/components/schemas/UserRole"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
       security:
         - bearerAuth: []
   /roles/{roleId}:
@@ -221,18 +221,18 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: succesful retrieval
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserRole'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                $ref: "#/components/schemas/UserRole"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
     patch:
@@ -254,22 +254,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserRole'
+              $ref: "#/components/schemas/UserRole"
       responses:
-        '200':
+        "200":
           description: succesfull update
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserRole'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                $ref: "#/components/schemas/UserRole"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
     delete:
@@ -287,18 +287,18 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: succesful retrieval
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserRole'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                $ref: "#/components/schemas/UserRole"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
   /users:
@@ -309,18 +309,18 @@ paths:
       summary: Get collections of users
       description: Returns collections of users
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
+                  $ref: "#/components/schemas/User"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
       security:
         - bearerAuth: []
     post:
@@ -334,20 +334,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
       responses:
-        '201':
+        "201":
           description: successfull creation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-        '400':
+                $ref: "#/components/schemas/User"
+        "400":
           description: invalid request body
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
       security:
         - bearerAuth: []
   /users/{userId}:
@@ -366,20 +366,20 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/User'
-                  - $ref: '#/components/schemas/Profile'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                  - $ref: "#/components/schemas/User"
+                  - $ref: "#/components/schemas/Profile"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
     patch:
@@ -402,25 +402,25 @@ paths:
           application/json:
             schema:
               allOf:
-                - $ref: '#/components/schemas/Profile'
-                - $ref: '#/components/schemas/User'
+                - $ref: "#/components/schemas/Profile"
+                - $ref: "#/components/schemas/User"
       responses:
-        '200':
+        "200":
           description: successfull update
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/Profile'
-                  - $ref: '#/components/schemas/User'
-        '400':
+                  - $ref: "#/components/schemas/Profile"
+                  - $ref: "#/components/schemas/User"
+        "400":
           description: invalid request body
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
     delete:
@@ -438,20 +438,20 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/Profile'
-                  - $ref: '#/components/schemas/User'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                  - $ref: "#/components/schemas/Profile"
+                  - $ref: "#/components/schemas/User"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
   /progresses:
@@ -476,18 +476,18 @@ paths:
             format: int64
           example: 1
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Progress'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
+                  $ref: "#/components/schemas/Progress"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
       security:
         - bearerAuth: []
     post:
@@ -501,20 +501,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Progress'
+              $ref: "#/components/schemas/Progress"
       responses:
-        '201':
+        "201":
           description: successfull creation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Progress'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
+                $ref: "#/components/schemas/Progress"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
       security:
         - bearerAuth: []
   /progresses/{progressId}:
@@ -534,18 +534,18 @@ paths:
             format: int64
           example: 1
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Progress'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                $ref: "#/components/schemas/Progress"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
     patch:
@@ -568,22 +568,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Progress'
+              $ref: "#/components/schemas/Progress"
       responses:
-        '200':
+        "200":
           description: successfull update
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Progress'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                $ref: "#/components/schemas/Progress"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
     delete:
@@ -602,18 +602,18 @@ paths:
             format: int64
           example: 1
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Progress'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                $ref: "#/components/schemas/Progress"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
   /orders:
@@ -637,18 +637,18 @@ paths:
             format: int64
           example: 1
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Progress'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
+                  $ref: "#/components/schemas/Progress"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
       security:
         - bearerAuth: []
     post:
@@ -662,20 +662,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Order'
+              $ref: "#/components/schemas/Order"
       responses:
-        '201':
+        "201":
           description: successfull creation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Order'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
+                $ref: "#/components/schemas/Order"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
       security:
         - bearerAuth: []
   /orders/{orderId}:
@@ -695,18 +695,18 @@ paths:
             format: int64
           example: 1
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Order'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                $ref: "#/components/schemas/Order"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
   /courses:
@@ -717,14 +717,14 @@ paths:
       summary: Get collections of courses
       description: Returns collections of courses
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/CourseSimple'
+                  $ref: "#/components/schemas/CourseSimple"
     post:
       operationId: addCourse
       tags:
@@ -736,20 +736,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Course'
+              $ref: "#/components/schemas/Course"
       responses:
-        '201':
+        "201":
           description: successfull creation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Course'
-        '400':
+                $ref: "#/components/schemas/Course"
+        "400":
           description: invalid request body
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
       security:
         - bearerAuth: []
   /courses/{courseId}:
@@ -768,21 +768,21 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/Course'
+                  - $ref: "#/components/schemas/Course"
                   - type: object
                     properties:
                       modules:
                         type: array
                         items:
-                          $ref: '#/components/schemas/CourseModule'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                          $ref: "#/components/schemas/CourseModule"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
     patch:
       operationId: updateCourse
       tags:
@@ -802,22 +802,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Course'
+              $ref: "#/components/schemas/Course"
       responses:
-        '200':
+        "200":
           description: successfull update
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Course'
-        '400':
+                $ref: "#/components/schemas/Course"
+        "400":
           description: invalid request body
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
     delete:
@@ -835,25 +835,25 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/Course'
+                  - $ref: "#/components/schemas/Course"
                   - type: object
                     properties:
                       modules:
                         type: array
                         items:
-                          $ref: '#/components/schemas/CourseModule'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                          $ref: "#/components/schemas/CourseModule"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
   /courses/{courseId}/modules:
@@ -871,12 +871,12 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: succesful retrieval
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CourseModule'
+                $ref: "#/components/schemas/CourseModule"
     post:
       operationId: createModule
       tags:
@@ -895,27 +895,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CourseModule'
+              $ref: "#/components/schemas/CourseModule"
       responses:
-        '201':
+        "201":
           description: succesful creation
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/CourseModule'
+                  - $ref: "#/components/schemas/CourseModule"
                   - oneOf:
                       - type: array
                         items: []
                       - type: array
                         items:
-                          $ref: '#/components/schemas/CourseModule'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
+                          $ref: "#/components/schemas/CourseModule"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
       security:
         - bearerAuth: []
   /courses/{courseId}/modules/{moduleId}:
@@ -939,21 +939,21 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/CourseModule'
+                  - $ref: "#/components/schemas/CourseModule"
                   - type: object
                     properties:
                       contents:
                         type: array
                         items:
-                          $ref: '#/components/schemas/CourseContent'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                          $ref: "#/components/schemas/CourseContent"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
     patch:
       operationId: updateModule
       tags:
@@ -979,22 +979,22 @@ paths:
           application/json:
             schema:
               allOf:
-                - $ref: '#/components/schemas/CourseModule'
+                - $ref: "#/components/schemas/CourseModule"
       responses:
-        '200':
+        "200":
           description: successfull update
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CourseModule'
-        '400':
+                $ref: "#/components/schemas/CourseModule"
+        "400":
           description: invalid request body
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
     delete:
@@ -1017,25 +1017,25 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/CourseModule'
+                  - $ref: "#/components/schemas/CourseModule"
                   - type: object
                     properties:
                       contents:
                         type: array
                         items:
-                          $ref: '#/components/schemas/CourseContent'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                          $ref: "#/components/schemas/CourseContent"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
   /courses/{courseId}/modules/{moduleId}/contents:
@@ -1059,14 +1059,14 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: succesful retrieval
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/CourseContentSimple'
+                  $ref: "#/components/schemas/CourseContentSimple"
     post:
       operationId: createContent
       tags:
@@ -1091,20 +1091,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CourseContent'
+              $ref: "#/components/schemas/CourseContent"
       responses:
-        '201':
+        "201":
           description: succesful createion
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CourseContent'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
+                $ref: "#/components/schemas/CourseContent"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
       security:
         - bearerAuth: []
   /courses/{courseId}/modules/{moduleId}/contents/{contentId}:
@@ -1134,14 +1134,14 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CourseContent'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                $ref: "#/components/schemas/CourseContent"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
     patch:
       operationId: updateContent
       tags:
@@ -1173,22 +1173,22 @@ paths:
           application/json:
             schema:
               allOf:
-                - $ref: '#/components/schemas/CourseContent'
+                - $ref: "#/components/schemas/CourseContent"
       responses:
-        '200':
+        "200":
           description: successfull update
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CourseContent'
-        '400':
+                $ref: "#/components/schemas/CourseContent"
+        "400":
           description: invalid request body
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
     delete:
@@ -1217,17 +1217,17 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfull deletion
           content:
             application/json:
               schema:
                 $ref: ../components/schemas/CourseContent.yaml
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
   /courseTypes:
@@ -1238,14 +1238,14 @@ paths:
       summary: Get all course types
       description: Returns all course types
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/CourseType'
+                  $ref: "#/components/schemas/CourseType"
     post:
       operationId: addCourseType
       tags:
@@ -1257,20 +1257,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CourseType'
+              $ref: "#/components/schemas/CourseType"
       responses:
-        '201':
+        "201":
           description: successfull creation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CourseType'
-        '400':
+                $ref: "#/components/schemas/CourseType"
+        "400":
           description: invalid request body
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
       security:
         - bearerAuth: []
   /courseTypes/{courseTypeId}:
@@ -1289,14 +1289,14 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CourseType'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                $ref: "#/components/schemas/CourseType"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
     patch:
       operationId: updateCourseType
       tags:
@@ -1316,22 +1316,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CourseType'
+              $ref: "#/components/schemas/CourseType"
       responses:
-        '200':
+        "200":
           description: successfull update
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CourseType'
-        '400':
+                $ref: "#/components/schemas/CourseType"
+        "400":
           description: invalid request body
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
     delete:
@@ -1349,18 +1349,18 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CourseType'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                $ref: "#/components/schemas/CourseType"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
   /categories:
@@ -1371,14 +1371,14 @@ paths:
       summary: Get all categories
       description: Returns all categories
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Category'
+                  $ref: "#/components/schemas/Category"
     post:
       operationId: addCategory
       tags:
@@ -1390,20 +1390,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Category'
+              $ref: "#/components/schemas/Category"
       responses:
-        '201':
+        "201":
           description: successfull creation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Category'
-        '400':
+                $ref: "#/components/schemas/Category"
+        "400":
           description: invalid request body
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
       security:
         - bearerAuth: []
   /categories/{categoryId}:
@@ -1422,14 +1422,14 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Category'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                $ref: "#/components/schemas/Category"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
     patch:
       operationId: updateCategory
       tags:
@@ -1449,22 +1449,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Category'
+              $ref: "#/components/schemas/Category"
       responses:
-        '200':
+        "200":
           description: successfull update
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Category'
-        '400':
+                $ref: "#/components/schemas/Category"
+        "400":
           description: invalid request body
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
     delete:
@@ -1482,18 +1482,18 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfull deletion
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Category'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                $ref: "#/components/schemas/Category"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
   /assets:
@@ -1504,14 +1504,14 @@ paths:
       summary: Get all assets detail
       description: Returns all assets detail
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/CourseAsset'
+                  $ref: "#/components/schemas/CourseAsset"
     post:
       operationId: addAsset
       tags:
@@ -1523,20 +1523,20 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/CourseAsset'
+              $ref: "#/components/schemas/CourseAsset"
       responses:
-        '201':
+        "201":
           description: successfull creation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CourseAsset'
-        '400':
+                $ref: "#/components/schemas/CourseAsset"
+        "400":
           description: invalid request body
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
       security:
         - bearerAuth: []
   /assets/{assetId}:
@@ -1555,14 +1555,14 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfull retrieval
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CourseAsset'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                $ref: "#/components/schemas/CourseAsset"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
     patch:
       operationId: updateAsset
       tags:
@@ -1582,22 +1582,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CourseAsset'
+              $ref: "#/components/schemas/CourseAsset"
       responses:
-        '200':
+        "200":
           description: successfull update
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CourseAsset'
-        '400':
+                $ref: "#/components/schemas/CourseAsset"
+        "400":
           description: invalid request body
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
     delete:
@@ -1615,18 +1615,18 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfull deletion
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CourseAsset'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbidenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
+                $ref: "#/components/schemas/CourseAsset"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbidenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
 components:
@@ -1646,6 +1646,25 @@ components:
           type: string
           example: secret123
           writeOnly: true
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        name:
+          type: string
+          example: Hard Skill
+        createdAt:
+          type: string
+          example: 01/01/2023
+          readOnly: true
+        updatedAt:
+          type: string
+          example: 01/01/2023
+          readOnly: true
     User:
       allOf:
         - type: object
@@ -1674,7 +1693,7 @@ components:
               type: integer
               format: int64
               example: 1
-        - $ref: '#/components/schemas/UserLogin'
+        - $ref: "#/components/schemas/UserLogin"
         - type: object
           properties:
             createdAt:
@@ -1742,10 +1761,10 @@ components:
               type: string
               example: 01/01/1999
             address:
-              $ref: '#/components/schemas/Address'
+              $ref: "#/components/schemas/Address"
             phone:
               type: string
-              example: '08123456789'
+              example: "08123456789"
             userId:
               type: integer
               format: int64
@@ -1772,13 +1791,13 @@ components:
           default: today
         endDate:
           type: string
-          default: 'null'
+          default: "null"
         completedContentId:
           type: array
           items:
             type: integer
             format: int64
-            default: 'null'
+            default: "null"
     OrderItem:
       type: object
       properties:
@@ -1818,7 +1837,7 @@ components:
         orderItems:
           type: array
           items:
-            $ref: '#/components/schemas/OrderItem'
+            $ref: "#/components/schemas/OrderItem"
         status:
           type: string
           enum:
@@ -1854,25 +1873,6 @@ components:
           type: string
           example: 01/01/2023
           readOnly: true
-    Category:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          readOnly: true
-        name:
-          type: string
-          example: Hard Skill
-        createdAt:
-          type: string
-          example: 01/01/2023
-          readOnly: true
-        updatedAt:
-          type: string
-          example: 01/01/2023
-          readOnly: true
     CourseSimple:
       type: object
       properties:
@@ -1899,7 +1899,7 @@ components:
         courseType:
           readOnly: true
           allOf:
-            - $ref: '#/components/schemas/CourseType'
+            - $ref: "#/components/schemas/CourseType"
         mentorId:
           type: integer
           format: int64
@@ -1908,7 +1908,7 @@ components:
         mentor:
           readOnly: true
           allOf:
-            - $ref: '#/components/schemas/User'
+            - $ref: "#/components/schemas/User"
         categoryId:
           type: integer
           format: int64
@@ -1917,7 +1917,7 @@ components:
         category:
           readOnly: true
           allOf:
-            - $ref: '#/components/schemas/Category'
+            - $ref: "#/components/schemas/Category"
         totalModules:
           type: integer
           format: int64
@@ -1963,7 +1963,7 @@ components:
           readOnly: true
         user:
           allOf:
-            - $ref: '#/components/schemas/User'
+            - $ref: "#/components/schemas/User"
           readOnly: true
         name:
           type: string
@@ -1985,7 +1985,7 @@ components:
           writeOnly: true
     CourseContent:
       allOf:
-        - $ref: '#/components/schemas/CourseContentSimple'
+        - $ref: "#/components/schemas/CourseContentSimple"
         - type: object
           properties:
             description:
@@ -2002,7 +2002,7 @@ components:
               readOnly: true
               type: array
               items:
-                $ref: '#/components/schemas/CourseAsset'
+                $ref: "#/components/schemas/CourseAsset"
     CourseModule:
       type: object
       properties:
@@ -2026,7 +2026,7 @@ components:
           readOnly: true
           type: array
           items:
-            $ref: '#/components/schemas/CourseContent'
+            $ref: "#/components/schemas/CourseContent"
           default: []
         createdAt:
           type: string
@@ -2038,7 +2038,7 @@ components:
           readOnly: true
     Course:
       allOf:
-        - $ref: '#/components/schemas/CourseSimple'
+        - $ref: "#/components/schemas/CourseSimple"
         - type: object
           properties:
             description:
@@ -2048,7 +2048,7 @@ components:
               readOnly: true
               type: array
               items:
-                $ref: '#/components/schemas/CourseModule'
+                $ref: "#/components/schemas/CourseModule"
               default: []
   responses:
     SuccessNoContent:
